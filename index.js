@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
+const { circle, square, triangle } = require('./lib/shapes');
 
 const prompts = [
     {
@@ -39,25 +40,28 @@ async function generateLogo() {
     }
 }
 
-function generateSvgContent({ text, textColor, shape, shapeColor }) {
+function generateSvgContent({ acronym, textColor, shape, shapeColor }) {
     let shapeSVG = '';
     const centerX = 150, centerY = 100, size = 50;
+    let textY = centerY;
+
     switch(shape) {
         case 'circle':
-            shapeSVG = `<circle cx="${centerX}" cy="${centerY}" r="${size / 2}" fill="${shapeColor}" />`;
+            shapeSVG = circle(centerX, centerY, size, shapeColor);
             break;
-            case 'square':
-                shapeSVG = `<rect x="${centerX - size / 2}" y="${centerY - size / 2}" width="${size}" height="${size}" fill="${shapeColor}" />`;
-                break;
-                case 'triangle':
-                    shapeSVG = `<polygon points="${centerX},${centerY - size / 2} ${centerX - size / 2},${centerY + size / 2} ${centerX + size / 2},${centerY + size / 2}" fill="${shapeColor}" />`;
-                    break;
+        case 'square':
+            shapeSVG = square(centerX, centerY, size, shapeColor);
+            break;
+        case 'triangle':
+            shapeSVG = triangle(centerX, centerY, size, shapeColor);
+            break;
     }
+
     return `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         ${shapeSVG}
-        <text x="${centerX}" y="${centerY + 80}" fill="${textColor}" text-anchor="middle" font-size="20">${text}</text>
-    </svg>
-  `;
+        <text x="${centerX}" y="${textY}" fill="${textColor}" text-anchor="middle" font-size="20">${acronym}</text>
+    </svg>`;
 }
+
 
 generateLogo();

@@ -1,5 +1,4 @@
 <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="150" cy="100" r="25" fill="Blue" />
-        <text x="150" y="180" fill="Red" text-anchor="middle" font-size="20">JMN</text>
+        <rect x="125" y="75" width="50" height="50" fill="Purple" />
+        <text x="150" y="100" fill="Pink" text-anchor="middle" font-size="20">JMN</text>
     </svg>
-  
